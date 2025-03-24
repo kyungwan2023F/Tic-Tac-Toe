@@ -185,10 +185,14 @@ function GameController() {
 }
 
 function screenController() {
+    let playerOneScore = 0;
+    let playerTwoScore = 0;
     const game = GameController();
     const board = document.querySelector(".board");
     const turn = document.querySelector(".turn");
     const againButton = document.querySelector(".play_again");
+    const scoreOneDisplay = document.querySelector(".player1_score");
+    const scoreTwoDisplay = document.querySelector(".player2_score");
     let gameOver = false;
 
     const updateScreen = (winner = null) => {
@@ -230,6 +234,15 @@ function screenController() {
 
         if (winner !== null) {
             turn.textContent = `${winner.name} wins!`;
+
+            switch (winner.token) {
+                case 1:
+                    scoreOneDisplay.textContent = playerOneScore;
+                    break;
+                case 2:
+                    scoreTwoDisplay.textContent = playerTwoScore;
+                    break;  
+            }
             return;
         }
 
@@ -255,6 +268,12 @@ function screenController() {
         }
         else {
             gameOver = true;
+            if (result.token === 1){
+                playerOneScore += 1;
+            }
+            else {
+                playerTwoScore += 1;
+            }
             updateScreen(result);
         }
     }
