@@ -1,137 +1,167 @@
-html, body {
-    background-color: rgb(235, 180, 112);
+html,
+body {
+  background-color: rgb(235, 180, 112);
 }
+
 /* Container Styling */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 /* Turn Indicator */
 .turn {
-    font-size: 2rem;
-    margin-bottom: 5rem;
+  font-size: 2rem;
+  margin-bottom: 5rem;
 }
 
 /* Board Styling */
 .board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 5px;
-    background-color: #333;
-    padding: 10px;
-    border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 /* Individual Cell Styling */
 .cell {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: bold;
-    background-color: white;
-    border: 2px solid black;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: white;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 /* Hover Effect */
 .cell:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 /* Player X and O Styling */
 .cell.x {
-    color: red;
+  color: red;
 }
 
 .cell.o {
-    color: blue;
+  color: blue;
 }
 
 /* Winning Message */
 .message {
-    font-size: 1.2rem;
-    margin-top: 15px;
+  font-size: 1.2rem;
+  margin-top: 15px;
 }
 
 /* button */
-.play_again {
-    margin: 100px;
-    padding: 15px 40px;
-    border: none;
-    outline: none;
-    color: #FFF;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 12px;
-    font-size: 20px;
-  }
-  .play_again::after {
-    content: "";
-    z-index: -1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #333;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
-  }
-  /* glow */
-  .play_again::before {
-    content: "";
-    background: linear-gradient(
-      45deg,
+.play_again,
+.reset_score_button {
+  margin-top: 100px;
+  padding: 15px 40px;
+  border: none;
+  outline: none;
+  color: #FFF;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.reset_score_button {
+  margin: 40px;
+}
+
+.play_again::after,
+.reset_score_button::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+/* glow */
+.play_again::before,.reset_score_button::before{
+  content: "";
+  background: linear-gradient(45deg,
       #FF0000, #FF7300, #FFFB00, #48FF00,
-      #00FFD5, #002BFF, #FF00C8, #FF0000
-    );
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    background-size: 600%;
-    z-index: -1;
-    width: calc(100% + 4px);
-    height:  calc(100% + 4px);
-    filter: blur(8px);
-    animation: glowing 20s linear infinite;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
-    opacity: 0;
-  }
-  
-  @keyframes glowing {
-    0% {background-position: 0 0;}
-    50% {background-position: 400% 0;}
-    100% {background-position: 0 0;}
-  }
-  
-  /* hover */
-  .play_again:hover::before {
-    opacity: 1;
-  }
-  
-  .play_again:active:after {
-    background: transparent;
-  }
-  
-  .play_again:active {
-    color: #000;
-    font-weight: bold;
+      #00FFD5, #002BFF, #FF00C8, #FF0000);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 600%;
+  z-index: -1;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  filter: blur(8px);
+  animation: glowing 20s linear infinite;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
   }
 
-  .board_container {
-    display: flex;
-    justify-content: center;
-    gap: 5rem; /* Space between board and scoreboard */
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* hover */
+.play_again:hover::before {
+  opacity: 1;
+}
+
+.reset_score_button:hover::before {
+  opacity: 1;
+}
+
+.play_again:active:after {
+  background: transparent;
+}
+
+.reset_score_button:active:after {
+  background: transparent;
+}
+
+.play_again:active {
+  color: #000;
+  font-weight: bold;
+}
+
+.reset_score_button:active {
+  color: #000;
+  font-weight: bold;
+}
+
+.board_container {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  /* Space between board and scoreboard */
 }
 
 .player {
@@ -179,4 +209,3 @@ html, body {
   height: 5rem;
   border-style: solid;
 }
-

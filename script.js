@@ -193,6 +193,7 @@ function screenController() {
     const againButton = document.querySelector(".play_again");
     const scoreOneDisplay = document.querySelector(".player1_score");
     const scoreTwoDisplay = document.querySelector(".player2_score");
+    const reset_score_button = document.querySelector(".reset_score_button");
     let gameOver = false;
 
     const updateScreen = (winner = null) => {
@@ -230,7 +231,16 @@ function screenController() {
             updateScreen();
         });
 
-
+        reset_score_button.addEventListener('click', () => {
+            game.getBoard().clearBoard();
+            turn.textContent = `${game.resetPressed().name}'s turn`;
+            playerOneScore = 0;
+            playerTwoScore = 0;
+            scoreOneDisplay.textContent = playerOneScore;
+            scoreTwoDisplay.textContent = playerTwoScore;
+            gameOver = false;
+            updateScreen();
+        });
 
         if (winner !== null) {
             turn.textContent = `${winner.name} wins!`;
